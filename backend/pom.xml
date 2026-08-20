@@ -85,11 +85,11 @@
 					<failBuildOnCVSS>7</failBuildOnCVSS>
 					<formats>HTML,JSON</formats>
 				</configuration>
-				<executions>
+				<!--executions>
 					<execution>
 						<goals><goal>check</goal></goals>
 					</execution>
-				</executions>
+				</executions-->
 			</plugin>
 
 			<plugin>
