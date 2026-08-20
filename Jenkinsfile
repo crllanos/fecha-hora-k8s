@@ -118,7 +118,7 @@ pipeline {
             steps {
                 sh '''
                   sleep 5
-                  curl -sf http://localhost:30080/api/datetime || exit 1
+                  curl -sf http://192.168.122.168:30080/api/datetime || exit 1
                 '''
             }
         }
