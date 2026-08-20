@@ -13,8 +13,8 @@ spec:
     spec:
       containers:
         - name: fecha-hora-k8s-backend
-          image: fecha-hora-k8s-backend:1.0
-          imagePullPolicy: IfNotPresent
+          image: localhost:5000/fecha-hora-k8s-backend:latest
+          imagePullPolicy: Always
           env:
             - name: DB_USER
               valueFrom: {secretKeyRef: {name: postgres-secret, key: POSTGRES_USER}}
@@ -28,5 +28,5 @@ metadata:
   name: fecha-hora-k8s-backend
   namespace: fecha-hora-k8s
 spec:
-  selector: {app: backend}
-  ports: [{port: 8080}]
+  selector: {app: fecha-hora-k8s-backend}
+  ports: [{port: 8080, targetPort: 8080}]
