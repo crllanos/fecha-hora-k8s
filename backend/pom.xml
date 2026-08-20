@@ -84,6 +84,7 @@
 					<!-- falla el build si encuentra CVE con score >= 7 (High) -->
 					<failBuildOnCVSS>7</failBuildOnCVSS>
 					<formats>HTML,JSON</formats>
+					<nvdApiDelay>4000</nvdApiDelay>
 				</configuration>
 				<!--executions>
 					<execution>
