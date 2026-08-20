@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>fecha-hora-k8s PoC</title>
+    <meta charset="UTF-8">
+    <title>Fecha y Hora</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f5f5f5; }
+        .card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #333; font-size: 1.2rem; margin-bottom: 16px; }
+        #fecha { font-size: 2rem; font-weight: bold; color: #2E2C27; }
+    </style>
 </head>
 <body>
-
-<script>
-  fetch('http://localhost:8080/api/datetime')
-    //.then(r => r.json()) 
-  .then(r => {  b = r.json(); console.log(b); return b; })
-    .then(d => { console.log(d); document.getElementById('fecha').innerText = d.datetime });
-</script>
-<h1 id="fecha">Cargando...</h1>
-
+    <div class="card">
+        <h1>Fecha y hora actual</h1>
+        <div id="fecha">Cargando...</div>
+    </div>
+    <script>
+        fetch('http://localhost:8080/api/datetime')
+            .then(r => r.json())
+            .then(d => document.getElementById('fecha').innerText = d.datetime)
+            .catch(() => document.getElementById('fecha').innerText = 'Error al conectar');
+    </script>
 </body>
 </html>
