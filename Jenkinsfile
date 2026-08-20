@@ -62,7 +62,8 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
                     dir('backend') {
-                        sh "mvn -B dependency-check:check -Dnvd.api.key=${NVD_KEY}"
+                        sh 'echo "[DEBUG] NVD_KEY length: ${#NVD_KEY}"'
+                        sh 'mvn -B dependency-check:check'
                     }
                 }
             }
@@ -79,7 +80,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Docker Build & Push Imágenes') {
             steps {
                 dir('backend') {
