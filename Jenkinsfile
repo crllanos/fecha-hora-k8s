@@ -62,7 +62,7 @@ pipeline {
             steps {
                 withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
                     dir('backend') {
-                        sh 'mvn -B dependency-check:check -Dnvd.api.key=${NVD_KEY}'
+                        sh "mvn -B dependency-check:check -Dnvd.api.key=${NVD_KEY}"
                     }
                 }
             }
