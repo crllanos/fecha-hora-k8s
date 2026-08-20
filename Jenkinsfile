@@ -60,8 +60,10 @@ pipeline {
 
         stage('OWASP Dependency Check') {
             steps {
-                dir('backend') {
-                    sh 'mvn -B dependency-check:check'
+                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
+                    dir('backend') {
+                        sh 'mvn -B dependency-check:check -Dnvd.api.key=${NVD_KEY}'
+                    }
                 }
             }
             post {
@@ -77,7 +79,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Docker Build & Push Imágenes') {
             steps {
                 dir('backend') {
