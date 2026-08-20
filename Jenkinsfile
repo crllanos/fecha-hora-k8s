@@ -9,7 +9,7 @@ pipeline {
         REGISTRY  = "localhost:5000"
         NAMESPACE = "fecha-hora-k8s"
         TAG       = "${env.BUILD_NUMBER}"
-        SONAR_URL = "http://localhost:9000"
+        SONAR_URL = "http://192.168.122.168:9000"
     }
 
     stages {
