@@ -58,28 +58,34 @@ pipeline {
             }
         }
 
-        stage('OWASP Dependency Check') {
-            steps {
-                withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
-                    dir('backend') {
-                        sh 'echo "[DEBUG] NVD_KEY length: ${#NVD_KEY}"'
-                        sh 'mvn -B dependency-check:check -Dnvd.api.key=\${NVD_KEY}'
-                    }
-                }
-            }
-            post {
-                always {
-                    publishHTML(target: [
-                        allowMissing         : true,
-                        alwaysLinkToLastBuild: true,
-                        keepAll              : true,
-                        reportDir            : 'backend/target',
-                        reportFiles          : 'dependency-check-report.html',
-                        reportName           : 'OWASP Dependency Check'
-                    ])
-                }
-            }
-        }
+// @TODO: OWASP Dependency Check — falla con error 403 en NVD API
+// Posibles causas: key no activada, rate limiting en CI, o delay insuficiente
+// Descomentar y revisar cuando se resuelva el acceso a NVD
+//
+// stage('OWASP Dependency Check') {
+//     steps {
+//         withCredentials([string(credentialsId: 'nvd-api-key', variable: 'NVD_KEY')]) {
+//             dir('backend') {
+//                 sh """
+//                   mvn -B dependency-check:check \
+//                     -Dnvd.api.key=\${NVD_KEY}
+//                 """
+//             }
+//         }
+//     }
+//     post {
+//         always {
+//             publishHTML(target: [
+//                 allowMissing         : true,
+//                 alwaysLinkToLastBuild: true,
+//                 keepAll              : true,
+//                 reportDir            : 'backend/target',
+//                 reportFiles          : 'dependency-check-report.html',
+//                 reportName           : 'OWASP Dependency Check'
+//             ])
+//         }
+//     }
+// }
 
         stage('Docker Build & Push Imágenes') {
             steps {
