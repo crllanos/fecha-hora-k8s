@@ -34,6 +34,7 @@ pipeline {
         stage('Deploy to k3s') {
             steps {
                 sh """
+                    kubectl apply -f k8s/
                     kubectl -n ${NAMESPACE} set image deployment/fecha-hora-k8s-backend fecha-hora-k8s-backend=${REGISTRY}/fecha-hora-k8s-backend:${TAG}
                     kubectl -n ${NAMESPACE} set image deployment/fecha-hora-k8s-frontend fecha-hora-k8s-frontend=${REGISTRY}/fecha-hora-k8s-frontend:${TAG}
                     kubectl -n ${NAMESPACE} rollout status deployment/fecha-hora-k8s-backend --timeout=120s

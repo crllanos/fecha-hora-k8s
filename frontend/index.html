@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>fecha-hora-k8s PoC</title>
+</head>
+<body>
+
+<script>
+  fetch('http://localhost:8080/api/datetime')
+    //.then(r => r.json()) 
+  .then(r => {  b = r.json(); console.log(b); return b; })
+    .then(d => { console.log(d); document.getElementById('fecha').innerText = d.datetime });
+</script>
+<h1 id="fecha">Cargando...</h1>
+
+</body>
+</html>
